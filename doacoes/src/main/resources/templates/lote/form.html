@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout}">
+  <div th:fragment="content">
+    <h2 th:text="${lote.id} == null ? 'Novo Lote' : 'Editar Lote'"></h2>
+    <form th:action="@{/lotes/salvar}" th:object="${lote}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+        <div class="form-group">
+            <label>Data de Entrega</label>
+            <input type="date" class="form-control" name="dataEntrega" th:value="${lote.dataEntrega}" />
+        </div>
+
+        <div class="form-group">
+            <label>Órgão Fiscalizador</label>
+            <select class="form-control" th:field="*{idOrgaoFiscalizador}">
+                <option value="">-- selecione --</option>
+                <option th:each="f : ${fiscalizadores}" th:value="${f.id}" th:text="${f.nome}"
+                        th:selected="${lote.idOrgaoFiscalizador} == ${f.id}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Órgão Donatário</label>
+            <select class="form-control" th:field="*{idOrgaoDonatario}">
+                <option value="">-- selecione --</option>
+                <option th:each="d : ${donatarios}" th:value="${d.id}" th:text="${d.nome}"
+                        th:selected="${lote.idOrgaoDonatario} == ${d.id}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Observação</label>
+            <textarea class="form-control" th:field="*{observacao}"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Produtos (selecione os já cadastrados)</label>
+            <div th:each="p : ${todosProdutos}">
+                <label><input type="checkbox" name="produtoIds" th:value="${p.id}"
+                              th:checked="${#lists.contains(lote.produtos, p)}"/> <span th:text="${p.nome}"></span></label><br/>
+            </div>
+            <small class="form-text text-muted">Você também pode criar produtos em "Produtos" e depois vinculá-los aqui.</small>
+        </div>
+
+        <button class="btn btn-success" type="submit">Salvar</button>
+        <a class="btn btn-secondary" th:href="@{/lotes}">Cancelar</a>
+    </form>
+</div>
+</html>

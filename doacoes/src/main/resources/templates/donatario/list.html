@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout}">
+  <div th:fragment="content">
+    <h2>Órgãos Donatários</h2>
+    <a class="btn btn-primary mb-2" th:href="@{/donatarios/novo}">Novo</a>
+    <table class="table table-striped">
+        <thead><tr><th>ID</th><th>Nome</th><th>Telefone</th><th>Endereço</th><th>Ações</th></tr></thead>
+        <tbody>
+        <tr th:each="o : ${lista}">
+            <td th:text="${o.id}">1</td>
+            <td th:text="${o.nome}">Nome</td>
+            <td th:text="${o.telefone}">Tel</td>
+            <td th:text="${o.endereco}">End</td>
+            <td>
+                <a th:href="@{|/donatarios/editar/${o.id}|}" class="btn btn-sm btn-info">Editar</a>
+                <a th:href="@{|/donatarios/deletar/${o.id}|}" class="btn btn-sm btn-danger">Excluir</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</html>

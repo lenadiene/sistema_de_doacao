@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout">
+<head>
+    <meta charset="UTF-8" />
+    <title>Doações - Sistema</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"/>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">Doações</a>
+  <div class="navbar-nav">
+    <a class="nav-item nav-link" th:href="@{/fiscalizador}">Fiscalizadores</a>
+    <a class="nav-item nav-link" th:href="@{/donatarios}">Donatários</a>
+    <a class="nav-item nav-link" th:href="@{/produtos}">Produtos</a>
+    <a class="nav-item nav-link" th:href="@{/lotes}">Lotes</a>
+  </div>
+</nav>
+<div class="container mt-3">
+    <div th:insert="~{::content}"></div>
+</div>
+</body>
+</html>
